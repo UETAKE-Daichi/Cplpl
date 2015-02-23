@@ -1,0 +1,26 @@
+//make dir 
+
+#include <iostream>
+#include <string.h>
+#include <time.h>
+#include <direct.h>
+using namespace std;
+
+int main(void){
+
+	struct tm *dir_date;
+	time_t timer;
+	char str_date[256];
+	char logfileName[256];
+	char dir_name[100];
+	char c;
+
+	timer = time(NULL);
+	dir_date  = localtime(&timer);
+	strftime(dir_name, 256, "C:\data_%Y_%m_%d_%H_%M_%S",dir_date);
+	//sprintf_s(dir_name,sizeof(dir_name),"F:\Prosilica_%09lu",dir_date);
+	mkdir(dir_name);
+	//sprintf_s(logfileName, "%s/Frames.log", dir_name);
+
+	
+}
