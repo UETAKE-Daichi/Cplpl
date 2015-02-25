@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string.h>
 #include <time.h>
-//windows version 
-#include <direct.h>
+#include <stdio.h>
+//windows 
+//#include <direct.h>
+//linux
+#include <sys/stat.h>
 using namespace std;
 
 //char dir_name[100];//ディレクトリの名前
@@ -22,11 +25,13 @@ int main(void){
 	//時間保存してディレクトリを掘る
 	timer = time(NULL);
 	dir_date  = localtime(&timer);
-	strftime(dir_name, 256, "C:\data_%Y_%m_%d_%H_%M_%S",dir_date);
-	mkdir(dir_name);
-	/*
+	strftime(dir_name, 256, "./data_%Y_%m_%d_%H_%M_%S",dir_date);
+	//mkdir(dir_name);//windows
+	mkdir(dir_name,0777);//linux
+
+	
 	//時間の名前のファイルに画像を書き込む
-	sprintf_s(logfileName, "%s/Frames_log.txt", dir_name);//dir_nameの下にFrame.logというファイル名のファイルを作成する
+	sprintf(logfileName, "%s/Frames_log.txt", dir_name);//dir_nameの下にFrame.logというファイル名のファイルを作成する
 	
 	
 	if((fpLog = fopen(logfileName, "w"))==NULL){
@@ -39,10 +44,11 @@ int main(void){
 		timer = time(NULL);
 		date  = localtime(&timer);
 		strftime(str, 255, "%Y/%m/%d, %H:%M:%S",date);
-		sprintf_s(logMessage, "Count, %06d, %s ", i, str);
+		sprintf(logMessage, "Count, %06d, %s \n", i, str);
 		fprintf(fpLog, logMessage);
+		sleep(0.004);
 	}
-	*/
+	
 
 	
 	//sprintf_s(dir_name,sizeof(dir_name),"F:\Prosilica_%09lu",dir_date);
