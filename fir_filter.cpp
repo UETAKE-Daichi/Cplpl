@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void){
-	char input_filename[] = "input.txt";
-	char output_filename[] = "output.txt";
+int main(int argc, char *argv[]){
+
+	char input_filename  = *argv[1];
+	char output_filename = *argv[2];
 	
 	FILE *input_fp;
 	FILE *output_fp;
@@ -20,14 +21,14 @@ int main(void){
 	}
 
 
-	if ((input_fp = fopen(input_filename, "r")) == NULL)
+	if ((input_fp = fopen(argv[1], "r")) == NULL)
     {
         printf("inputファイルが存在しません。プログラムを終了します。\n");
         exit(1);
     }
 	
 	
-	if ((output_fp = fopen(output_filename, "w")) == NULL)
+	if ((output_fp = fopen(argv[2], "w")) == NULL)
     {
         printf("outputファイルが存在しません。プログラムを終了します。\n");
         exit(1);
@@ -58,4 +59,8 @@ int main(void){
 
 		//fputs(out[i],output_fp);
 	}
+
+
+
+	
 }
